@@ -1,0 +1,18 @@
+p.login_words{
+    font-size: 15px;
+    font-weight: bold;
+    width: 50px;
+	margin-left: 100px;
+}
+
+p.register_words{
+    font-size: 15px;
+    font-weight: bold;
+    width: 60px;
+	margin-left: 100px;
+}
+
+p.blank{
+	width: 100px;
+	height: 12px;
+}
