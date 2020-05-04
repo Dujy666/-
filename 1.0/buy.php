@@ -1,11 +1,12 @@
 ﻿<?php
+include_once "user.php";
 session_start();
-if(!isset($_COOKIE['username'])){
+if(!isset($_SESSION['user'])){
     echo "<script type='text/javascript'>alert('购买请先登录');</script>";
     header("Refresh:1;url=login.php");
 }else{
     include_once "conn/conn.php";
-    $user=$_COOKIE['username'];
+    /*$user=$_COOKIE['username'];
     $sql = "select money from tb_user where name='$user'";
     $result = mysqli_query($conn,$sql);
     $check = mysqli_fetch_row($result);
@@ -16,16 +17,13 @@ if(!isset($_COOKIE['username'])){
     $point = $check1[0];
 
     $_SESSION['money'] = $money;
-    $_SESSION['point'] = $point;
-
-    $sql2 = "select sp_lesson from tb_user where name='$user'";
-    $result2 = mysqli_query($conn,$sql2);
-    $check2 = mysqli_fetch_row($result2);
-
-    $check3 = 0;
-
-
-    if($check2[0]!=$check3){
+    $_SESSION['point'] = $point;*/
+    $p =$_SESSION["user"];
+    $user=unserialize($p);
+    $sql = "select sp_lesson from tb_user where name='$user->name'";
+    $result = mysqli_query($conn,$sql);
+    $check = mysqli_fetch_row($result);
+    if($check[0]!=0){
         echo "<script type='text/javascript'>alert('您已经有C语言这门课了');</script>";
         header("Refresh:0;url=course.php");
     }
@@ -66,14 +64,14 @@ $top->show();
 <br>
 
 <div  align="center" >
-    <form method="post" action="buy_do.php">
+    <form method="get" action="buy_do.php">
         <table>
             <tr>
                 <td><font face="隶书" size="3" color="">金币售价：50</font></td>
                 <td>&nbsp;</td>
-                <td> <font face="隶书" size="3">你的余额：</font><?php if($money<50){ ?><strong><font color="red"><?php echo $money;?></font></strong><?php }else{
+                <td> <font face="隶书" size="3">你的余额：</font><?php if($user->money<50){ ?><strong><font color="red"><?php echo $user->money;?></font></strong><?php }else{
                         ?>
-                        <strong><font color="blue"><?php echo $money;?></font></strong>
+                        <strong><font color="blue"><?php echo $user->money;?></font></strong>
                         <?php
                     }
                     ?>
@@ -86,9 +84,9 @@ $top->show();
             <tr>
                 <td><font face="隶书" size="3">积分售价：90</font></td>
                 <td>&nbsp;</td>
-                <td><font face="隶书" size="3">你的积分：</font><?php if($point<90){ ?><strong><font color="red"><?php echo $point;?></font></strong><?php }else{
+                <td><font face="隶书" size="3">你的积分：</font><?php if($user->point<90){ ?><strong><font color="red"><?php echo $user->point;?></font></strong><?php }else{
                         ?>
-                        <strong><font color="blue"><?php echo $point;?></font></strong>
+                        <strong><font color="blue"><?php echo $user->point;?></font></strong>
                         <?php
                     }
                     ?>

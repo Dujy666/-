@@ -120,7 +120,7 @@ $top->show();
 
     }
 </script>
-<form action="login_register_do.php" method="post" id="form1" onsubmit="return checkform()">
+<form action="login_register_do.php" method="get" id="form1" onsubmit="return checkform()">
     <table class="login_register_table">
         <tr><td><strong><font size="3" color="white">用户名</font></strong></td><td>&nbsp;</td><td><input type="text" name="user1" id="user1" class="form-control" placeholder="6位以上" ></td><td><div id="errusername" align="center"></div></td></tr>
         <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
